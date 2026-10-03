@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="متجر أدوات مكتبية - تسوق أفضل الأدوات المكتبية والقرطاسية بأسعار مناسبة وجودة عالية." />
+  <title>مكتبتي | أدوات مكتبية وقرطاسية</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap"
+    crossorigin="anonymous"
+  />
+
+  <!-- TODO(security): When deploying with a server, add Content-Security-Policy,
+       X-Frame-Options: DENY, and X-Content-Type-Options: nosniff headers.
+       For this fully offline HTML file, the equivalent meta CSP tag is set below.
+       Inline scripts are unavoidable in a single-file offline app; document them here. -->
+  <!--
+    NOTE: This is a pure frontend / offline app. No authentication, no session tokens,
+    and no sensitive data is stored in localStorage — only non-sensitive order data
+    (name, phone, address, product). Phone numbers are masked in UI displays.
+    No eval(), no dangerouslySetInnerHTML, no innerHTML used for user data — only
+    textContent and DOM builder helpers (see app.js).
+  -->
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; font-src https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self'; img-src 'self' data:; object-src 'none'; frame-ancestors 'none';"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="navbar" id="main-navbar" role="banner">
+    <div class="navbar-container">
+      <div class="navbar-brand" id="nav-logo" role="button" tabindex="0" aria-label="الصفحة الرئيسية">
+        <span class="brand-icon" aria-hidden="true">✏️</span>
+        <span class="brand-name">مكتبتي</span>
+      </div>
+      <nav class="navbar-links" role="navigation" aria-label="القائمة الرئيسية">
+        <a href="#" class="nav-link active" id="nav-home" data-view="home" aria-current="page">الرئيسية</a>
+        <a href="#" class="nav-link" id="nav-products" data-view="products">المنتجات</a>
+        <a href="#" class="nav-link" id="nav-orders" data-view="orders">طلباتي</a>
+      </nav>
+      <button class="hamburger" id="hamburger-btn" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu" role="menu" aria-hidden="true">
+      <a href="#" class="mobile-nav-link" data-view="home" role="menuitem">الرئيسية</a>
+      <a href="#" class="mobile-nav-link" data-view="products" role="menuitem">المنتجات</a>
+      <a href="#" class="mobile-nav-link" data-view="orders" role="menuitem">طلباتي</a>
+    </div>
+  </header>
+
+  <!-- ===== HOME VIEW ===== -->
+  <main id="view-home" class="view active" aria-label="الصفحة الرئيسية">
+
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="hero-badge">🎯 الأفضل في السوق</div>
+        <h1 class="hero-title" id="hero-title">
+          كل ما تحتاجه<br/>
+          <span class="hero-gradient-text">لمكتبك المثالي</span>
+        </h1>
+        <p class="hero-subtitle">
+          أدوات مكتبية وقرطاسية بجودة عالية وأسعار تنافسية.<br/>
+          اكتشف تشكيلتنا الواسعة من المنتجات المختارة بعناية.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" id="hero-shop-btn" aria-label="تسوق الآن - عرض كل المنتجات">
+            تسوق الآن
+            <span class="btn-arrow" aria-hidden="true">←</span>
+          </button>
+          <button class="btn-outline" id="hero-bestsellers-btn" aria-label="الأكثر مبيعاً">
+            الأكثر مبيعاً ⭐
+          </button>
+        </div>
+        <div class="hero-stats" role="list" aria-label="إحصائيات المتجر">
+          <div class="stat" role="listitem">
+            <span class="stat-num">+500</span>
+            <span class="stat-label">منتج متوفر</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat" role="listitem">
+            <span class="stat-num">+2k</span>
+            <span class="stat-label">عميل راضٍ</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat" role="listitem">
+            <span class="stat-num">99%</span>
+            <span class="stat-label">تقييم إيجابي</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image-container" aria-hidden="true">
+        <div class="hero-blob"></div>
+        <img
+          src="assets/hero_office_supplies.png"
+          alt="مجموعة من الأدوات المكتبية"
+          class="hero-image"
+          width="560"
+          height="420"
+          loading="eager"
+        />
+        <div class="hero-floating-card card-1" aria-hidden="true">
+          <span class="fc-icon">📦</span>
+          <div>
+            <div class="fc-title">توصيل سريع</div>
+            <div class="fc-sub">خلال 24 ساعة</div>
+          </div>
+        </div>
+        <div class="hero-floating-card card-2" aria-hidden="true">
+          <span class="fc-icon">⭐</span>
+          <div>
+            <div class="fc-title">5.0 تقييم</div>
+            <div class="fc-sub">من آلاف العملاء</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best Sellers Section -->
+    <section class="section bestsellers-section" aria-labelledby="bestsellers-title">
+      <div class="section-header">
+        <div class="section-badge">🏆 الأكثر طلباً</div>
+        <h2 class="section-title" id="bestsellers-title">الأكثر مبيعاً</h2>
+        <p class="section-subtitle">منتجات اختارها عملاؤنا بكثرة وحظيت بأعلى التقييمات</p>
+      </div>
+      <div class="products-grid" id="bestsellers-grid" role="list" aria-label="قائمة المنتجات الأكثر مبيعاً">
+        <!-- Cards rendered by JS -->
+      </div>
+      <div class="view-all-container">
+        <button class="btn-view-all" id="view-all-btn" aria-label="عرض كل المنتجات">
+          <span>عرض كل المنتجات</span>
+          <span class="view-all-arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M10 3L3 10L10 17M17 10H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Features Strip -->
+    <section class="features-strip" aria-label="مميزات المتجر">
+      <div class="feature-item">
+        <span class="feature-icon" aria-hidden="true">🚚</span>
+        <div>
+          <div class="feature-title">توصيل مجاني</div>
+          <div class="feature-desc">للطلبات فوق 100 ج.م</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon" aria-hidden="true">🔒</span>
+        <div>
+          <div class="feature-title">دفع آمن</div>
+          <div class="feature-desc">جميع طرق الدفع مقبولة</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon" aria-hidden="true">↩️</span>
+        <div>
+          <div class="feature-title">إرجاع مجاني</div>
+          <div class="feature-desc">خلال 14 يوم</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon" aria-hidden="true">📞</span>
+        <div>
+          <div class="feature-title">دعم 24/7</div>
+          <div class="feature-desc">فريق متخصص لمساعدتك</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== PRODUCTS VIEW ===== -->
+  <main id="view-products" class="view" aria-label="كتالوج المنتجات" hidden>
+    <section class="section" aria-labelledby="products-page-title">
+      <div class="section-header">
+        <div class="section-badge">🛍️ كتالوج المنتجات</div>
+        <h2 class="section-title" id="products-page-title">كل المنتجات</h2>
+        <p class="section-subtitle">تشكيلة واسعة من أدوات الكتابة والقرطاسية والمستلزمات المكتبية</p>
+      </div>
+      <!-- Filter bar -->
+      <div class="filter-bar" role="toolbar" aria-label="فلترة المنتجات">
+        <button class="filter-btn active" data-category="all" aria-pressed="true">الكل</button>
+        <button class="filter-btn" data-category="writing" aria-pressed="false">أدوات الكتابة</button>
+        <button class="filter-btn" data-category="paper" aria-pressed="false">دفاتر وأوراق</button>
+        <button class="filter-btn" data-category="tools" aria-pressed="false">أدوات مكتبية</button>
+        <button class="filter-btn" data-category="organize" aria-pressed="false">تنظيم</button>
+      </div>
+      <div class="products-grid" id="all-products-grid" role="list" aria-label="كل المنتجات">
+        <!-- Cards rendered by JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== ORDERS VIEW ===== -->
+  <main id="view-orders" class="view" aria-label="طلباتي" hidden>
+    <section class="section" aria-labelledby="orders-title">
+      <div class="section-header">
+        <div class="section-badge">📋 سجل الطلبات</div>
+        <h2 class="section-title" id="orders-title">طلباتي</h2>
+        <p class="section-subtitle">سجل جميع طلباتك المحفوظة محلياً على هذا الجهاز</p>
+      </div>
+      <div id="orders-container" role="list" aria-label="قائمة الطلبات">
+        <!-- Orders rendered by JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== ORDER MODAL ===== -->
+  <div
+    id="order-modal"
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-hidden="true"
+    hidden
+  >
+    <div class="modal-box" role="document">
+      <button class="modal-close" id="modal-close-btn" aria-label="إغلاق نافذة الطلب">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="modal-product-preview" id="modal-product-preview" aria-label="معاينة المنتج">
+        <!-- Product preview rendered by JS -->
+      </div>
+      <h2 class="modal-title" id="modal-title">تأكيد الطلب</h2>
+      <p class="modal-subtitle" id="modal-subtitle">أدخل بياناتك وسنتواصل معك في أقرب وقت</p>
+
+      <!-- Success state -->
+      <div id="order-success" class="order-success" hidden aria-live="polite" aria-atomic="true">
+        <div class="success-icon" aria-hidden="true">✅</div>
+        <h3 class="success-title">تم استلام طلبك!</h3>
+        <p class="success-msg" id="success-msg"></p>
+        <button class="btn-primary" id="success-close-btn" style="margin-top:1.5rem;width:100%;">
+          حسناً، شكراً!
+        </button>
+      </div>
+
+      <!-- Order form -->
+      <form id="order-form" novalidate aria-label="نموذج الطلب">
+        <input type="hidden" id="order-product-id" name="productId" />
+        <div class="form-group">
+          <label class="form-label" for="order-name">الاسم الكامل <span class="required" aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="order-name"
+            name="name"
+            class="form-input"
+            placeholder="مثال: محمد أحمد"
+            maxlength="80"
+            required
+            autocomplete="name"
+            aria-required="true"
+            aria-describedby="name-error"
+          />
+          <span class="field-error" id="name-error" role="alert" aria-live="assertive"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="order-phone">رقم الهاتف <span class="required" aria-hidden="true">*</span></label>
+          <input
+            type="tel"
+            id="order-phone"
+            name="phone"
+            class="form-input"
+            placeholder="01xxxxxxxxx"
+            maxlength="15"
+            required
+            autocomplete="tel"
+            aria-required="true"
+            aria-describedby="phone-error"
+            pattern="^(01)[0-9]{9}$"
+            inputmode="tel"
+          />
+          <span class="field-error" id="phone-error" role="alert" aria-live="assertive"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="order-address">العنوان <span class="required" aria-hidden="true">*</span></label>
+          <textarea
+            id="order-address"
+            name="address"
+            class="form-input form-textarea"
+            placeholder="المحافظة، المدينة، الشارع..."
+            maxlength="300"
+            required
+            autocomplete="street-address"
+            aria-required="true"
+            aria-describedby="address-error"
+            rows="3"
+          ></textarea>
+          <span class="field-error" id="address-error" role="alert" aria-live="assertive"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="order-qty">الكمية</label>
+          <div class="qty-controls" role="group" aria-label="التحكم في الكمية">
+            <button type="button" class="qty-btn" id="qty-dec" aria-label="تقليل الكمية">−</button>
+            <input
+              type="number"
+              id="order-qty"
+              name="quantity"
+              class="form-input qty-input"
+              value="1"
+              min="1"
+              max="99"
+              aria-label="الكمية"
+            />
+            <button type="button" class="qty-btn" id="qty-inc" aria-label="زيادة الكمية">+</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="order-notes">ملاحظات (اختياري)</label>
+          <input
+            type="text"
+            id="order-notes"
+            name="notes"
+            class="form-input"
+            placeholder="أي ملاحظات إضافية..."
+            maxlength="200"
+            autocomplete="off"
+          />
+        </div>
+        <div class="order-summary" id="order-summary" aria-live="polite" aria-label="ملخص الطلب">
+          <!-- Summary rendered by JS -->
+        </div>
+        <button type="submit" class="btn-primary btn-full" id="submit-order-btn">
+          <span id="submit-label">تأكيد الطلب 🛒</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true" aria-hidden="true"></div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span aria-hidden="true">✏️</span> مكتبتي
+      </div>
+      <p class="footer-text">© 2024 مكتبتي. جميع الحقوق محفوظة.</p>
+      <p class="footer-note">
+        <!-- TODO(security): When connecting to a backend API, use HTTPS endpoints only.
+             Store no auth tokens in localStorage. See app.js apiService for the hook. -->
+        بيانات طلباتك محفوظة محلياً على جهازك فقط.
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
