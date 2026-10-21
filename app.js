@@ -104,7 +104,6 @@ const PRODUCTS = [
     oldPrice: 48,
     image: 'assets/product_scissors.png',
     emoji: '✂️',
-    badge: 'عرض',
     badgeType: 'badge-offer',
     stars: 4,
     isBestSeller: false,
@@ -118,7 +117,7 @@ const PRODUCTS = [
     desc: 'طقم أقلام تحديد بألوان زاهية لا تنسكب، مثالية للإبداع والتنظيم.',
     price: 55,
     oldPrice: null,
-    image: null,
+    image: 'assets/أقلام تحديد ملونة.jpg',
     emoji: '🖊️',
     badge: 'جديد',
     badgeType: 'badge-new',
@@ -134,7 +133,7 @@ const PRODUCTS = [
     desc: 'آلة حاسبة علمية باللمس، شاشة واضحة، مثالية للطلاب والمهندسين.',
     price: 120,
     oldPrice: 150,
-    image: null,
+    image: 'assets/آلة حاسبة علمية.jfif',
     emoji: '🖩',
     badge: null,
     stars: 5,
@@ -149,7 +148,7 @@ const PRODUCTS = [
     desc: 'موزع شريط لاصق بتصميم أنيق، معدني داخلي، يأتي مع بكرة شريط شفاف.',
     price: 40,
     oldPrice: null,
-    image: null,
+    image: 'assets/موزع شريط لاصق.png',
     emoji: '📏',
     badge: null,
     stars: 4,
@@ -164,7 +163,7 @@ const PRODUCTS = [
     desc: 'ملف بلاستيكي لتنظيم الأوراق، يتسع لـ 60 ورقة A4، بأقسام متعددة.',
     price: 25,
     oldPrice: null,
-    image: null,
+    image: 'assets/ملف تنظيم أوراق A4.png',
     emoji: '📁',
     badge: 'جديد',
     badgeType: 'badge-new',
@@ -180,7 +179,7 @@ const PRODUCTS = [
     desc: 'مسطرة معدنية دقيقة بمقياس cm/inch، متينة ومثالية للرسم الهندسي.',
     price: 20,
     oldPrice: null,
-    image: null,
+    image: 'assets/مسطرة معدنية 30cm.png',
     emoji: '📐',
     badge: null,
     stars: 4,
@@ -195,9 +194,8 @@ const PRODUCTS = [
     desc: 'ورق A4 ناصع البياض 80 جرام، مناسب لجميع أنواع الطابعات والتصوير.',
     price: 85,
     oldPrice: 100,
-    image: null,
+    image: 'assets/رزمة ورق A4 (500 ورقة).png',
     emoji: '🗂️',
-    badge: 'عرض',
     badgeType: 'badge-offer',
     stars: 5,
     isBestSeller: false,
@@ -211,7 +209,7 @@ const PRODUCTS = [
     desc: 'مشابك أوراق معدنية عالية الجودة في علبة عملية، لتنظيم الأوراق بشكل مرتب.',
     price: 15,
     oldPrice: null,
-    image: null,
+    image: 'assets/مشبك أوراق معدني (50 قطعة).png',
     emoji: '🔗',
     badge: null,
     stars: 4,
@@ -639,9 +637,9 @@ function renderOrders() {
 
   if (orders.length === 0) {
     const empty = DOM.el('div', { cls: 'orders-empty', attrs: { role: 'status' } });
-    const icon  = DOM.el('div', { cls: 'orders-empty-icon', text: '📋' });
+    const icon = DOM.el('div', { cls: 'orders-empty-icon', text: '📋' });
     const title = DOM.el('h3', { cls: 'orders-empty-title', text: 'لا توجد طلبات بعد' });
-    const sub   = DOM.el('p',  { text: 'سيظهر هنا سجل طلباتك بعد تقديم أول طلب.' });
+    const sub = DOM.el('p', { text: 'سيظهر هنا سجل طلباتك بعد تقديم أول طلب.' });
     DOM.append(empty, icon, title, sub);
     container.appendChild(empty);
     return;
@@ -667,23 +665,23 @@ function renderOrders() {
 
     const metaName = DOM.el('div', { cls: 'order-meta-item' });
     const labelName = DOM.el('span', { cls: 'meta-label', text: 'الاسم: ' });
-    const valName   = DOM.el('span', { text: order.name });
+    const valName = DOM.el('span', { text: order.name });
     DOM.append(metaName, labelName, valName);
 
     const metaPhone = DOM.el('div', { cls: 'order-meta-item' });
     const labelPhone = DOM.el('span', { cls: 'meta-label', text: 'الهاتف: ' });
     // Phone is masked for display (PII protection)
-    const valPhone   = DOM.el('span', { text: maskPhone(order.phone) });
+    const valPhone = DOM.el('span', { text: maskPhone(order.phone) });
     DOM.append(metaPhone, labelPhone, valPhone);
 
     const metaQty = DOM.el('div', { cls: 'order-meta-item' });
     const labelQty = DOM.el('span', { cls: 'meta-label', text: 'الكمية: ' });
-    const valQty   = DOM.el('span', { text: String(order.quantity) });
+    const valQty = DOM.el('span', { text: String(order.quantity) });
     DOM.append(metaQty, labelQty, valQty);
 
     const metaPrice = DOM.el('div', { cls: 'order-meta-item' });
     const labelPrice = DOM.el('span', { cls: 'meta-label', text: 'الإجمالي: ' });
-    const valPrice   = DOM.el('span', { text: `${order.total} ج.م` });
+    const valPrice = DOM.el('span', { text: `${order.total} ج.م` });
     DOM.append(metaPrice, labelPrice, valPrice);
 
     const dateStr = new Date(order.timestamp).toLocaleString('ar-EG');
@@ -787,7 +785,7 @@ function buildModalPreview(product) {
   }
 
   const info = DOM.el('div');
-  const nameEl  = DOM.el('div', { cls: 'preview-name', text: product.name });
+  const nameEl = DOM.el('div', { cls: 'preview-name', text: product.name });
   const priceEl = DOM.el('div', {
     cls: 'preview-price',
     text: `${product.price} ج.م / قطعة`,
@@ -808,7 +806,7 @@ function updateOrderSummary(product, qty) {
 
   const subtotal = product.price * qty;
   const shipping = subtotal >= 100 ? 0 : 20;
-  const total    = subtotal + shipping;
+  const total = subtotal + shipping;
 
   const rows = [
     { label: 'المنتج', value: product.name },
@@ -836,8 +834,8 @@ function clearFormErrors() {
   ['name', 'phone', 'address'].forEach(field => {
     const input = document.getElementById(`order-${field}`);
     const error = document.getElementById(`${field}-error`);
-    if (input)  { input.classList.remove('error'); input.removeAttribute('aria-invalid'); }
-    if (error)  { error.textContent = ''; }
+    if (input) { input.classList.remove('error'); input.removeAttribute('aria-invalid'); }
+    if (error) { error.textContent = ''; }
   });
 }
 
@@ -864,11 +862,11 @@ async function handleOrderSubmit(e) {
   if (!product) return;
 
   // Collect & sanitize
-  const rawName    = sanitizeText(document.getElementById('order-name').value, 80);
-  const rawPhone   = sanitizeText(document.getElementById('order-phone').value, 15);
+  const rawName = sanitizeText(document.getElementById('order-name').value, 80);
+  const rawPhone = sanitizeText(document.getElementById('order-phone').value, 15);
   const rawAddress = sanitizeText(document.getElementById('order-address').value, 300);
-  const rawQty     = parseInt(document.getElementById('order-qty').value, 10);
-  const rawNotes   = sanitizeText(document.getElementById('order-notes').value, 200);
+  const rawQty = parseInt(document.getElementById('order-qty').value, 10);
+  const rawNotes = sanitizeText(document.getElementById('order-notes').value, 200);
 
   let isValid = true;
 
@@ -890,7 +888,7 @@ async function handleOrderSubmit(e) {
   const qty = isNaN(rawQty) || rawQty < 1 ? 1 : Math.min(rawQty, 99);
   const subtotal = product.price * qty;
   const shipping = subtotal >= 100 ? 0 : 20;
-  const total    = subtotal + shipping;
+  const total = subtotal + shipping;
 
   const order = {
     id: generateOrderId(),
@@ -925,7 +923,7 @@ async function handleOrderSubmit(e) {
     // Build success message using textContent only
     successMsg.textContent = '';
     const line1 = document.createTextNode(`شكراً ${rawName}! تم تسجيل طلبك بنجاح.`);
-    const br    = document.createElement('br');
+    const br = document.createElement('br');
     const line2 = document.createTextNode(`سيتم التواصل معك على: ${maskPhone(rawPhone)}`);
     successMsg.appendChild(line1);
     successMsg.appendChild(br);
@@ -1038,7 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Hamburger / mobile menu ---------- */
   const hamburgerBtn = document.getElementById('hamburger-btn');
-  const mobileMenu   = document.getElementById('mobile-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
 
   function closeMobileMenu() {
     hamburgerBtn.classList.remove('open');
@@ -1123,7 +1121,7 @@ document.addEventListener('DOMContentLoaded', () => {
   orderForm.addEventListener('submit', handleOrderSubmit);
 
   /* ---------- Real-time input validation feedback ---------- */
-  document.getElementById('order-name').addEventListener('blur', function() {
+  document.getElementById('order-name').addEventListener('blur', function () {
     const v = sanitizeText(this.value, 80);
     if (v && !isValidName(v)) {
       showFieldError('name', 'الاسم مطلوب ويجب أن يكون من 2 إلى 80 حرفاً.');
@@ -1135,7 +1133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  document.getElementById('order-phone').addEventListener('blur', function() {
+  document.getElementById('order-phone').addEventListener('blur', function () {
     const v = sanitizeText(this.value, 15);
     if (v && !isValidPhone(v)) {
       showFieldError('phone', 'أدخل رقم هاتف مصري صحيح (11 رقم يبدأ بـ 01).');
